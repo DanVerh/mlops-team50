@@ -16,14 +16,15 @@ class Dataset:
 
     def download_commonsense_data(self, tar_file_url, tar_file):
         response = requests.get(tar_file_url, stream=True)
+        tar_file_path = os.path.join(self.data_path, tar_file)
         if response.status_code == 200:
-            with open(tar_file, 'wb') as f:
+            with open(tar_file_path, 'wb') as f:
                 f.write(response.raw.read())
 
         files_to_extract = ['ethics/commonsense/cm_train.csv',
                             'ethics/commonsense/cm_test.csv',
                             'ethics/commonsense/cm_test_hard.csv']
-        with tarfile.open(tar_file, 'r') as tar:
+        with tarfile.open(tar_file_path, 'r') as tar:
             for file_info in tar.getmembers():
                 if file_info.name in files_to_extract:
                     tar.extract(file_info, self.data_path)
@@ -34,11 +35,11 @@ class Dataset:
 
         tar_path = re.findall('/([^/]+)\.tar$', tar_file_url)[0]
         tar_file = f'{tar_path}.tar'
-        data_path = os.path.join(self.data_path, tar_path, target_folder)
-        if not path.exists(data_path):
+        dataset_path = os.path.join(self.data_path, tar_path, target_folder)
+        if not path.exists(dataset_path):
             self.download_commonsense_data(tar_file_url, tar_file)
 
-        data = (pd.concat([pd.read_csv(os.path.join(data_path, file)) for file in os.listdir(data_path)])
+        data = (pd.concat([pd.read_csv(os.path.join(dataset_path, file)) for file in os.listdir(dataset_path)])
                 .sample(frac=1, random_state=42)
                 .reset_index(drop=True)
                 .dropna(subset='input', axis=0)
