@@ -39,12 +39,16 @@ class Dataset:
         if not path.exists(dataset_path):
             self.download_commonsense_data(tar_file_url, tar_file)
 
+        def compute_text_len(text):
+            return len(text.split())
+
         data = (pd.concat([pd.read_csv(os.path.join(dataset_path, file)) for file in os.listdir(dataset_path)])
                 .sample(frac=1, random_state=42)
                 .reset_index(drop=True)
                 .dropna(subset='input', axis=0)
                 .drop(['edited', 'is_short'], axis=1)
                 .rename({'input': 'text'}, axis=1)
+                .assign(text_len=lambda x: x['text'].apply(compute_text_len))
         )
         train, temp = train_test_split(data, test_size=0.2, random_state=42)
         val, test = train_test_split(temp, test_size=0.5, random_state=42)

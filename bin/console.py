@@ -79,16 +79,16 @@ def predict(input_text: list[str], model_version='lyeonii/bert-small'):
 
 
 @app.command()
-def get_n_examples(n):
+def get_n_examples(n, max_len):
     n = int(n)
     dataset = Dataset()
-    examples = dataset.preprocess()['test'].sample(n)['text'].to_list()
+    examples = dataset.preprocess()['test'].query(f'text_len < {max_len}').sample(n)['text'].to_list()
     return examples
 
 
 @app.command()
-def predict_random_n(n):
-    predict(get_n_examples(n))
+def predict_random_n(n, max_len):
+    predict(get_n_examples(n, max_len))
 
 
 if __name__ == "__main__":
