@@ -3,9 +3,7 @@ import torch
 import torch.nn as nn
 
 
-
 class BERT_Arch(nn.Module):
-
     def __init__(self, bert, hidden_size):
         super(BERT_Arch, self).__init__()
         self.bert = bert
