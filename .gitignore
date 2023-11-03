@@ -1,4 +1,3 @@
-!*.gitkeep
 # temp data
 var/data/*
 var/model/*
@@ -11,3 +10,6 @@ var/model/*
 .venv
 __pycache__
 *.pyc
+
+# a helper to save empty dirs, this line should be the last one
+!*.gitkeep
