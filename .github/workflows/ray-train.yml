@@ -22,6 +22,11 @@ jobs:
         with:
           credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
 
+      # Set up ADC creds
+      - name: ADC creds
+        run: |
+          export GOOGLE_APPLICATION_CREDENTIALS="/home/runner/work/mlops-team50/mlops-team50/gha-creds-cd9c685963c7cf0b.json"
+
       - name: Install Ray
         run: |
           pip install -U "ray[default]" google-api-python-client
