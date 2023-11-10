@@ -5,11 +5,6 @@ on:
 
 jobs:
   train:
-    # Add 'id-token' with the intended permissions for workload identity federation
-    #permissions:
-    #  contents: 'read'
-    #  id-token: 'write'
-
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -25,7 +20,7 @@ jobs:
       # Set up ADC creds
       - name: ADC creds
         run: |
-          export GOOGLE_APPLICATION_CREDENTIALS="/home/runner/work/mlops-team50/mlops-team50/gha-creds-cd9c685963c7cf0b.json"
+          export GOOGLE_APPLICATION_CREDENTIALS="$(ls /home/runner/work/mlops-team50/mlops-team50/gha-creds-*.json)"
 
       - name: Install Ray
         run: |
