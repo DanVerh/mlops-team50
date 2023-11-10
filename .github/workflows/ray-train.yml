@@ -30,3 +30,7 @@ jobs:
         run: |
           cd ray
           ray up -y config.yaml
+
+      - name: Submit Ray python job
+        run: |
+          ray submit cluster.yaml script.py
