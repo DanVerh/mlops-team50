@@ -35,3 +35,8 @@ jobs:
         run: |
           cd ray
           ray submit config.yaml test.py
+
+      - name: Delete ray cluster
+        run: |
+          cd ray
+          ray down -y config.yaml
