@@ -1,0 +1,12 @@
+# A unique identifier for the head node and workers of this cluster.
+cluster_name: mlopsteam50
+
+# Cloud-provider specific configuration.
+provider:
+    type: gcp
+    region: us-west1
+    availability_zone: us-west1-a
+    project_id: daring-pilot-403921
+
+auth:
+    ssh_user: ubuntu
