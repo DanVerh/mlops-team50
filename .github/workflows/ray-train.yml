@@ -33,5 +33,4 @@ jobs:
 
       - name: Submit Ray python job
         run: |
-          cd ray
-          ray submit cluster.yaml script.py
+          ray submit config.yaml test.py
