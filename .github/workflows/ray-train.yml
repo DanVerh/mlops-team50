@@ -25,3 +25,8 @@ jobs:
       - name: Install Ray
         run: |
           pip install -U "ray[default]" google-api-python-client
+
+      - name: Start Ray cluster
+        run: |
+          cd ray
+          ray up -y config.yaml
