@@ -21,3 +21,7 @@ jobs:
         uses: 'google-github-actions/auth@v0'
         with:
           credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+
+      - name: Install Ray
+        run: |
+          pip install -U "ray[default]" google-api-python-client
