@@ -22,20 +22,24 @@ jobs:
         run: |
           export GOOGLE_APPLICATION_CREDENTIALS="$(ls /home/runner/work/mlops-team50/mlops-team50/gha-creds-*.json)"
 
+      # Installing neccessary Ray plugins
       - name: Install Ray
         run: |
           pip install -U "ray[default]" google-api-python-client
 
+      # Start Ray cluster defined in config
       - name: Start Ray cluster
         run: |
           cd ray
           ray up -y config.yaml
 
+      # Submit Ray model training job on the cluster
       - name: Submit Ray python job
         run: |
           cd ray
           ray submit config.yaml test.py
 
+      # Delete Ray cluster
       - name: Delete ray cluster
         run: |
           cd ray
