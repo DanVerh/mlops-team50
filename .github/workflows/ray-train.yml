@@ -35,7 +35,7 @@ jobs:
           ray submit config.yaml test.py
 
       # Delete Ray cluster
-      - name: Delete ray cluster
-        working-directory: ./ray
-        run: |
-          ray down -y config.yaml
+      #- name: Delete ray cluster
+      #  working-directory: ./ray
+      #  run: |
+      #    ray down -y config.yaml
