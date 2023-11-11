@@ -22,8 +22,8 @@ class Actor:
 
     def run_task(self):
         print('''TASK
-              ----------------''')
-        object_ids = [self.task_def.remote() for _ in range(10000)]
+----------------''')
+        object_ids = [self.task_def for _ in range(10000)]
         ip_addresses = ray.get(object_ids)
 
         result = None
