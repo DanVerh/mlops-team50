@@ -17,11 +17,6 @@ jobs:
         with:
           credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
 
-      # Set up ADC creds
-      #- name: ADC creds
-      #  run: |
-      #    export GOOGLE_APPLICATION_CREDENTIALS="$(ls /home/runner/work/mlops-team50/mlops-team50/gha-creds-*.json)"
-
       # Installing neccessary Ray plugins
       - name: Install Ray
         run: |
