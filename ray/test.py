@@ -10,10 +10,10 @@ class Actor:
         pass
 
     def get_cluster_resources(self):
-        print('''This cluster consists of
+        return '''This cluster consists of
             {} nodes in total
             {} CPU resources in total
-        '''.format(len(ray.nodes()), ray.cluster_resources()))
+        '''.format(len(ray.nodes()), ray.cluster_resources())
 
     def task_def(self):
         time.sleep(0.001)
@@ -26,9 +26,11 @@ class Actor:
         object_ids = [self.task_def.remote() for _ in range(10000)]
         ip_addresses = ray.get(object_ids)
 
+        result = None
         print('Tasks executed')
         for ip_address, num_tasks in Counter(ip_addresses).items():
-            print('    {} tasks on {}'.format(num_tasks, ip_address))
+            result = '    {} tasks on {}'.format(num_tasks, ip_address)
+        return result
 
 ray.init()
 
