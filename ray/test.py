@@ -36,6 +36,7 @@ ray.init()
 actor1 = Actor.options(num_cpus=2).remote()
 actor2 = Actor.options(num_gpus=1).remote()
 
-# Run tasks on different nodes
-result1 = ray.get(actor1.run_task.remote())
-result2 = ray.get(actor2.run_task.remote())
+actor1.get_cluster_resources.remote()
+actor1.run_task.remote()
+actor2.get_cluster_resources.remote()
+actor2.run_task.remote()
