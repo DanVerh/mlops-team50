@@ -22,9 +22,9 @@ class Actor:
 
     def run_task(self):
         print('''TASK
-----------------''')
+              ----------------''')
         object_ids = [self.task_def for _ in range(10000)]
-        ip_addresses = ray.get(object_ids)
+        ip_addresses = object_ids
 
         result = None
         print('Tasks executed')
