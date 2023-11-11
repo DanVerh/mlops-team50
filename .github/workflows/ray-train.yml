@@ -18,9 +18,9 @@ jobs:
           credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
 
       # Set up ADC creds
-      - name: ADC creds
-        run: |
-          export GOOGLE_APPLICATION_CREDENTIALS="$(ls /home/runner/work/mlops-team50/mlops-team50/gha-creds-*.json)"
+      #- name: ADC creds
+      #  run: |
+      #    export GOOGLE_APPLICATION_CREDENTIALS="$(ls /home/runner/work/mlops-team50/mlops-team50/gha-creds-*.json)"
 
       # Installing neccessary Ray plugins
       - name: Install Ray
@@ -29,18 +29,18 @@ jobs:
 
       # Start Ray cluster defined in config
       - name: Start Ray cluster
+        working-directory: ./ray
         run: |
-          cd ray
           ray up -y config.yaml
 
       # Submit Ray model training job on the cluster
       - name: Submit Ray python job
+        working-directory: ./ray
         run: |
-          cd ray
           ray submit config.yaml test.py
 
       # Delete Ray cluster
       - name: Delete ray cluster
+        working-directory: ./ray
         run: |
-          cd ray
           ray down -y config.yaml
