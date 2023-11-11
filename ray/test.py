@@ -36,7 +36,7 @@ ray.init()
 
 # Create actors with different resource demands
 actor1 = Actor.options(num_cpus=2).remote()
-actor2 = Actor.options(num_gpus=1).remote()
+actor2 = Actor.options(num_gpus=1, num_cpus=4).remote()
 
 print(ray.get(actor1.get_cluster_resources.remote()))
 print(ray.get(actor1.run_task.remote()))
