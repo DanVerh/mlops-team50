@@ -1,0 +1,63 @@
+# A unique identifier for the head node and workers of this cluster.
+cluster_name: mlopsteam50
+
+# The maximum number of worker nodes to launch in addition to the head node.
+max_workers: 10
+
+# Cloud-provider specific configuration.
+provider:
+    type: gcp
+    region: us-central1
+    availability_zone: us-central1-a
+    project_id: daring-pilot-403921
+
+# How Ray will authenticate with newly launched nodes.
+auth:
+    ssh_user: ubuntu
+
+# Provider-specific config for the head node, e.g. instance type.
+head_node:
+    machineType: n1-standard-2
+    disks:
+      - boot: true
+        autoDelete: true
+        type: PERSISTENT
+        initializeParams:
+          diskSizeGb: 50
+          sourceImage: projects/deeplearning-platform-release/global/images/family/tf-latest-cpu
+    scheduling:
+      - preemptible: false
+    serviceAccounts:
+      - email: default
+        scopes:
+          - https://www.googleapis.com/auth/cloud-platform
+
+# Provider-specific config for worker nodes, e.g. instance type. Note the number of GPUs.
+worker_nodes:
+    machineType: n1-standard-2
+    disks:
+      - boot: true
+        autoDelete: true
+        type: PERSISTENT
+        initializeParams:
+          diskSizeGb: 50
+          sourceImage: projects/deeplearning-platform-release/global/images/family/tf-latest-cpu
+    scheduling:
+      - preemptible: false
+    #serviceAccounts:
+    #  - email: default
+    #    scopes:
+    #      - https://www.googleapis.com/auth/cloud-platform
+    guestAccelerators:
+      - acceleratorType: projects/YOUR_PROJECT_ID/zones/us-central1-a/acceleratorTypes/nvidia-tesla-k80
+        acceleratorCount: 1
+
+# Files or directories to copy to the head and worker nodes. 
+#file_mounts: {}
+
+# List of commands that will be run before `setup_commands`.
+#initialization_commands: []
+
+# List of shell commands to run to set up nodes.
+#setup_commands:
+#    - echo 'export PATH="$HOME/anaconda3/envs/tensorflow2_latest_p37/bin:$PATH"' >> ~/.bashrc
