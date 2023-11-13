@@ -26,16 +26,16 @@ jobs:
       - name: Start Ray cluster
         working-directory: ./ray
         run: |
-          ray up -y configTest.yaml
+          ray up -y config.yaml
 
       # Submit Ray model training job on the cluster
       - name: Submit Ray python job
         working-directory: ./ray
         run: |
-          ray submit configTest.yaml test.py
+          ray submit config.yaml test.py
 
       # Delete Ray cluster
-      - name: Delete ray cluster
+      - name: Delete Ray cluster
         working-directory: ./ray
         run: |
-          ray down -y configTest.yaml
+          ray down -y config.yaml
