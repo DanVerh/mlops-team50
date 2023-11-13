@@ -33,7 +33,7 @@ provider:
     type: gcp
     region: us-west1
     availability_zone: us-west1-b
-    project_id: null # Globally unique project id
+    project_id: daring-pilot-403921
 
 # How Ray will authenticate with newly launched nodes.
 auth:
