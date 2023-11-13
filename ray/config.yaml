@@ -38,6 +38,6 @@ available_node_types:
                   diskSizeGb: 50
             accelerators:
                 - type: nvidia-tesla-t4
-        count: 1
+                  count: 1
             scheduling:
               - preemptible: true
