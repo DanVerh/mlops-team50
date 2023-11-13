@@ -29,15 +29,12 @@ available_node_types:
         max_workers: 2
         #resources: {"GPU": 1}
         node_config:
-            machineType: n1-standard-2
+            machineType: g2-standard-4
             disks:
               - boot: true
                 autoDelete: true
                 type: PERSISTENT
                 initializeParams:
                   diskSizeGb: 50
-            accelerators:
-                - type: nvidia-tesla-t4
-                  count: 1
             scheduling:
               - preemptible: true
