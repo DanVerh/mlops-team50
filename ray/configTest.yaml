@@ -56,7 +56,7 @@ available_node_types:
         # For more documentation on available fields, see:
         # https://cloud.google.com/compute/docs/reference/rest/v1/instances/insert
         node_config:
-            machineType: custom
+            machineType: custom-6-16384
             disks:
               - boot: true
                 autoDelete: true
