@@ -25,9 +25,9 @@ available_node_types:
                   # See https://cloud.google.com/compute/docs/images for more images
                   sourceImage: projects/deeplearning-platform-release/global/images/family/common-cpu
     ray_worker_small:
-        min_workers: 0
+        min_workers: 1
         max_workers: 2
-        resources: {"GPU": 4}
+        #resources: {"GPU": 1}
         node_config:
             machineType: n1-standard-2
             disks:
@@ -36,6 +36,8 @@ available_node_types:
                 type: PERSISTENT
                 initializeParams:
                   diskSizeGb: 50
-                  sourceImage: projects/deeplearning-platform-release/global/images/family/common-gpu
+            accelerators:
+                - type: nvidia-tesla-t4
+        count: 1
             scheduling:
               - preemptible: true
