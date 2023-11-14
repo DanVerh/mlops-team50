@@ -55,7 +55,7 @@ def evaluate(model_version="lyeonii/bert-small"):
     )
 
     model = Model(
-        model_version="lyeonii/bert-small", hidden_size=hidden_size, device=device
+        model_version=model_version, hidden_size=hidden_size, device=device
     )
     model.model.load_state_dict(
         torch.load(
@@ -80,7 +80,7 @@ def predict(input_text: list[str], model_version="lyeonii/bert-small"):
     )
 
     model = Model(
-        model_version="lyeonii/bert-small", hidden_size=hidden_size, device=device
+        model_version=model_version, hidden_size=hidden_size, device=device
     )
     model.model.load_state_dict(
         torch.load(
