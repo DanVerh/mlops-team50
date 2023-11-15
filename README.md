@@ -32,3 +32,18 @@ poetry install --no-root
 ```bash
 python bin/console.py train
 ```
+
+## Running censorship web API
+
+start the web service by running
+
+```bash
+python bin/web.py
+```
+
+and test it with `curl`
+
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{"text":"I hate you!"}' http://localhost:8001/censorship_status
+curl -X POST -H "Content-Type: application/json" -d '{"text":"I love you!"}' http://localhost:8001/censorship_status
+```
